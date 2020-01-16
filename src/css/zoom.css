@@ -1,0 +1,45 @@
+/*#lb-back {
+  top: 50%;
+  left: 50%;
+  margin-top: -15%;
+  margin-left: -25%;
+  width: 50%;
+  height: 50%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  position: fixed;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+#lb-back.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+#lb-img {
+  text-align: center;
+}*/
+
+/* [LIGHTBOX] */
+#lb-back {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s;
+}
+#lb-back.show {
+  visibility: visible;
+  opacity: 1;
+}
+#lb-img {
+  text-align: center;
+}

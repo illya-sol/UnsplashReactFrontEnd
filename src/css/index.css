@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: Roboto,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    overflow-y:scroll !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.click{
+  cursor: pointer !important;
+}
+
+[type="submit"] {
+  -webkit-appearance: none;
+}
+
+.modal .modal-footer{
+  text-align: center;
+}
+
+.modal{
+  overflow-x: hidden;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, minmax(5vw,auto));
+    grid-gap: 2px;
+}
+
+.containable{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+img{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#Search {
+  min-width: 25%;
+  margin-left: 5%;
+}
+
+#Search input{
+    font-family: Roboto;
+}
+
+i.icon-blue{
+  clor:blue;
+}
+
+.material-icons {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
