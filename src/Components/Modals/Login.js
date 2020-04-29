@@ -31,8 +31,7 @@ class Login extends React.Component{
       data:{
         "user": username,
         "password": password
-        },
-      headers: {'Access-Control-Allow-Origin': '*'}
+        }
       })
       .then(auth => {
       this.setState({username:'', password:''});
@@ -42,8 +41,10 @@ class Login extends React.Component{
 
       var modal = document.querySelector(".modal[id='login']");
       M.Modal.getInstance(modal).close();
+    })
+    .catch((err) =>{
+      console.log(err);
     });
-
   }
 
   swapOutModals(){

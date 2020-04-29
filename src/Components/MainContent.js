@@ -15,7 +15,6 @@ class MainContent extends React.Component{
   }
 
   componentDidMount(){
-    axios.options();
     axios.get('https://unsplash0backend.herokuapp.com/unsplash/start',{
       params:{
         "page": this.state.page,
