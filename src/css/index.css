@@ -33,6 +33,12 @@ code {
     grid-template-rows: repeat(3, minmax(5vw,auto));
     grid-gap: 2px;
 }
+.container-mobile{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, minmax(5vw,auto));
+    grid-gap: 2px;
+}
 
 .containable{
     width: 100%;
@@ -49,7 +55,7 @@ img{
 
 #Search {
   min-width: 25%;
-  margin-left: 5%;
+  margin-left: 15%;
 }
 
 #Search input{

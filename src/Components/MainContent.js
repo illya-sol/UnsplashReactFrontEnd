@@ -15,18 +15,18 @@ class MainContent extends React.Component{
   }
 
   componentDidMount(){
-    axios.get('http://localhost:3001/unsplash/start',{
+    axios.options();
+    axios.get('https://unsplash0backend.herokuapp.com/unsplash/start',{
       params:{
         "page": this.state.page,
         "per_page": 30,
         "order": "latest"
-      }
+      },
+      headers: {'Access-Control-Allow-Origin': '*'}
     })
     .then(response => {
       this.setState({latest: response.data.photos});
-    }).catch(err =>{
-      console.log(err);
-    })
+    }).catch(err =>{ console.log(err); })
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -35,13 +35,14 @@ class MainContent extends React.Component{
   }
 
   getImageList()  {
-    axios.get('http://localhost:3001/unsplash',{
+    axios.get('https://unsplash0backend.herokuapp.com/unsplash',{
       params:{
         "page": this.state.page,
         "per_page": 30,
         "order": "latest"
       },
       headers:{
+        'Access-Control-Allow-Origin': '*',
         'Authorization': 'Bearer '.concat(this.props.tokens.accessToken)
       }
     })
@@ -51,9 +52,7 @@ class MainContent extends React.Component{
         window.addEventListener('scroll', this.handleScroll);
         setTimeout(this.handleScroll(), 2500);
       }, 850);
-    }).catch(err =>{
-      console.log(err);
-    })
+    }).catch(err =>{ console.log(err); })
   }
 
   render(){
@@ -65,7 +64,7 @@ class MainContent extends React.Component{
           );
       });
     return(
-      <div className="container">
+      <div className={window.innerWidth <= 500 ? "container-mobile" : "container"}>
         {List}
       </div>
     );
@@ -73,14 +72,14 @@ class MainContent extends React.Component{
 
   handleScroll(){
     let el = document.documentElement;
-    if(window.scrollY > ( el.offsetHeight / 2 )){
+    if( window.scrollY > ( el.offsetHeight / 1.5 )){
         if(this.props.tokens.accessToken && this.props.tokens.refreshToken){
           window.removeEventListener('scroll', this.handleScroll);
           this.setState({page: (this.state.page + 1)});
           this.getImageList();
         }
         else{
-          var modal = document.querySelectorAll(".modal[id='login']")[0];
+          var modal = document.querySelector(".modal[id='login']");
           M.Modal.getInstance(modal).open();
         }
       }

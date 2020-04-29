@@ -1,0 +1,43 @@
+.Button {
+	background-color:#2e2e2e;
+	border-radius:4px;
+	border:2px solid #333029;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	font-weight:bold;
+	padding:2px 16px;
+	text-decoration:none;
+}
+
+.Button:hover {
+	background-color:#1c1c1c;
+}
+
+.Button:active {
+	position:relative;
+	top:1px;
+}
+
+.box{
+    margin-top: 12em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.quote{
+    display: inline-block;
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: 6em;
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.bottom{
+    vertical-align: middle;
+    font-size: 1.5em;
+    margin-top: 0;
+}
