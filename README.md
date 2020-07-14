@@ -3,7 +3,7 @@
 Unsplash FrontEnd is a React FrontEnd app.
 You can view website [Here](https://unsplash0frontend.herokuapp.com/)
 
-## Installation
+## Usage
 
 Use the node package manager to start React FrontEnd.
 
