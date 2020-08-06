@@ -15,6 +15,9 @@ module.exports = {
         fourth: "#4D402B",
         fifth: "#7F7059",
       },
+      margin: {
+        38: "9rem",
+      },
     },
   },
   variants: {
