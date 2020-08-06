@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useRef } from "react"
+import { useHistory } from "react-router-dom"
 import tw from "twin.macro"
 import { ReactComponent as Search } from "../resources/search.svg"
 
@@ -25,9 +26,12 @@ const Input = tw.input`
 `
 
 const SearchSvg = tw(Search)`
-   relative
-   ml-auto
-   -mt-12
+  relative
+  ml-auto
+  -mt-12
+  cursor-pointer
+  hover:fill-current 
+  hover:text-third
 `
 
 const Sep = tw.pre`
@@ -37,13 +41,25 @@ const Sep = tw.pre`
 `
 
 export const SearchInput: React.FC = () => {
+  const history = useHistory()
+  const Inputref = useRef<HTMLInputElement>(null)
+
+  const Searchclick = () => {
+    if (Inputref.current!.value !== "")
+      history.push("/search/" + Inputref.current!.value)
+  }
+
   return (
     <React.Fragment>
       <Sep />
       <Flexdiv>
         <Div>
-          <Input type="text" placeholder="Search by keyword..." />
-          <SearchSvg />
+          <Input
+            ref={Inputref}
+            type="text"
+            placeholder="Search by keyword..."
+          />
+          <SearchSvg onClick={Searchclick} />
         </Div>
       </Flexdiv>
       <Sep />
