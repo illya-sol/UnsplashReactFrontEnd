@@ -1,18 +1,17 @@
-import React, { useEffect } from "react"
+import React from "react"
 import tw from "twin.macro"
 
 const Div = tw.div`
-   lg:pr-6
-   lg:pl-6
+  bg-first
+  min-h-screen
 `
 
 const Container = tw.div`
-   
+  lg:pr-12
+  lg:pl-12
 `
 
-export const Navbar: React.FC = () => {
-  useEffect(() => {})
-
+export const MainContent: React.FC = () => {
   return (
     <Div>
       <Container></Container>
