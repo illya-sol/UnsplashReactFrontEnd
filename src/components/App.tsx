@@ -1,5 +1,8 @@
-import React from "react"
+import { observer } from "mobx-react"
+import React, { useContext } from "react"
 import tw from "twin.macro"
+import { ModalStore } from "../store/MobxStore"
+import { Register } from "./Forms/Register"
 import { Navbar } from "./Navbar"
 
 const AppDiv = tw.div`
@@ -20,15 +23,20 @@ const P = tw.p`
   text-purple-500
 `
 
-const App: React.FC = () => {
+const App: React.FC = observer(() => {
+  const isModal = useContext(ModalStore).isActive
+
+  const ConditionalModal: React.FC = () => {
+    if (isModal) return <Register />
+    return null
+  }
+
   return (
     <AppDiv>
       <Navbar />
-      <AppHeader>
-        <P>React App Rewired</P>
-      </AppHeader>
+      <ConditionalModal />
     </AppDiv>
   )
-}
+})
 
 export default App

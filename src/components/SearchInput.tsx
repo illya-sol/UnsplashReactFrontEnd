@@ -31,7 +31,7 @@ const SearchSvg = tw(Search)`
   -mt-12
   cursor-pointer
   hover:fill-current 
-  hover:text-third
+  hover:text-second
 `
 
 const Sep = tw.pre`
