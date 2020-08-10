@@ -6,24 +6,25 @@ import { ModalStore } from '../store/MobxStore'
 import { SearchInput } from './SearchInput'
 
 const Div = tw.div`
+  z-10
   flex
-  bg-second
+  bg-first
 `
 
 const HomeSvg = tw(Home)`
   scale-50
   mx-4 
   my-2 
-  hover:fill-current 
-  hover:text-white
+  fill-second
+  group-hover:fill-third 
 `
 
 const LoginSvg = tw(Login)`
   scale-50
   mx-4 
   my-2 
-  hover:fill-current 
-  hover:text-white
+  fill-second
+  group-hover:fill-third 
 `
 
 const LoginBtn = tw.button`
@@ -31,17 +32,17 @@ const LoginBtn = tw.button`
 `
 
 export const Navbar: React.FC = () => {
-  const flipModal = useContext(ModalStore).flipModal
+	const flipModal = useContext(ModalStore).flipModal
 
-  return (
-    <Div>
-      <button>
-        <HomeSvg />
-      </button>
-      <SearchInput />
-      <LoginBtn onClick={flipModal}>
-        <LoginSvg />
-      </LoginBtn>
-    </Div>
-  )
+	return (
+		<Div>
+			<button className="group">
+				<HomeSvg />
+			</button>
+			<SearchInput />
+			<LoginBtn className="group" onClick={flipModal}>
+				<LoginSvg />
+			</LoginBtn>
+		</Div>
+	)
 }

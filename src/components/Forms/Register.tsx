@@ -16,14 +16,19 @@ const Div = tw.div`
   max-h-full
   max-w-full
 `
-
-const Ddiv = styled(Div)`
-  animation: 1s ${animation}  
+const Blocker = tw.div`
+  fixed
+  top-0
+  left-0
+  right-0
+  bottom-0
+  bg-black
+  opacity-50
 `
 
 const Form = tw.form`
-  bg-fourth 
-  shadow-modal  
+  fixed
+  bg-first 
   rounded 
   mt-24
   px-8 
@@ -37,6 +42,10 @@ const Form = tw.form`
   max-w-lg
 `
 
+const AnForm = styled(Form)`
+  animation: 1s ${animation}  
+`
+
 const DivUsername = tw.div`
   mb-4
 `
@@ -47,6 +56,10 @@ const Label = tw.label`
   text-sm 
   font-bold
   mb-2
+`
+
+const WarningLabel = tw(Label)`
+  text-third
 `
 
 const InputUser = tw.input`
@@ -86,9 +99,9 @@ const InputPassword = tw.input`
   focus:shadow-outline
 `
 
-const Ppassword = tw.p`
+const Password = tw.p`
   text-white
-  text-xs 
+  text-sm
   italic
 `
 
@@ -99,24 +112,25 @@ const DivSubmit = tw.div`
 `
 
 const ButtonSubmit = tw.button`
-  bg-second
-  hover:bg-first
-  text-white 
   font-bold 
   py-2 
   px-4 
   rounded 
   focus:outline-none 
   focus:shadow-outline
+  bg-white
+  text-third
+  hover:bg-third
+  hover:text-second
 `
 
 const A = tw.a`
   inline-block 
   align-baseline 
   font-bold 
-  text-sm 
-  text-gray-500
-  hover:text-white
+  text-sm
+  text-second
+  hover:text-third
 `
 
 export const Register: React.FC = () => {
@@ -125,8 +139,9 @@ export const Register: React.FC = () => {
 
 	const onSubmit = () => {}
 	return (
-		<Ddiv onClick={flipModal}>
-			<Form onSubmit={handleSubmit(onSubmit)}>
+		<Div>
+			<Blocker onClick={flipModal} />
+			<AnForm onSubmit={handleSubmit(onSubmit)}>
 				<DivUsername>
 					<Label htmlFor="username">Username</Label>
 					<InputUser
@@ -139,16 +154,13 @@ export const Register: React.FC = () => {
 					/>
 				</DivUsername>
 				<DivEmail>
-					<Label htmlFor="email">
-						Email
-						{errors.email && errors.email.message}
-					</Label>
+					<Label htmlFor="email">Email</Label>
 					<InputUser
 						ref={register({
-							required: 'Required',
+							required: 'Email is Required!',
 							pattern: {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								message: 'invalid email address'
+								message: 'invalid email address!'
 							}
 						})}
 						id="email"
@@ -157,6 +169,7 @@ export const Register: React.FC = () => {
 						placeholder="Email"
 						autoComplete="email"
 					/>
+					<WarningLabel>{errors.email && errors.email.message}</WarningLabel>
 				</DivEmail>
 				<DivPassword>
 					<Label htmlFor="password">Password</Label>
@@ -168,13 +181,13 @@ export const Register: React.FC = () => {
 						placeholder="******************"
 						autoComplete="current-password"
 					/>
-					<Ppassword>Please choose a password.</Ppassword>
+					<Password>Please choose a password</Password>
 				</DivPassword>
 				<DivSubmit>
 					<ButtonSubmit type="submit">Sign In</ButtonSubmit>
 					<A href="/forgotpass">Forgot Password?</A>
 				</DivSubmit>
-			</Form>
-		</Ddiv>
+			</AnForm>
+		</Div>
 	)
 }

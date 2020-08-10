@@ -1,7 +1,8 @@
-import React from "react"
-import tw from "twin.macro"
+import React from 'react'
+import tw from 'twin.macro'
 
 const Div = tw.div`
+  z-0
   bg-first
   min-h-screen
 `
@@ -12,9 +13,9 @@ const Container = tw.div`
 `
 
 export const MainContent: React.FC = () => {
-  return (
-    <Div>
-      <Container></Container>
-    </Div>
-  )
+	return (
+		<Div>
+			<Container />
+		</Div>
+	)
 }
