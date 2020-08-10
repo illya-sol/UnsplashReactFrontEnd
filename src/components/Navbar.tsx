@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
-import tw from "twin.macro"
-import { ReactComponent as Home } from "../resources/home.svg"
-import { ReactComponent as Login } from "../resources/key.svg"
-import { ModalStore } from "../store/MobxStore"
-import { SearchInput } from "./SearchInput"
+import React, { useContext } from 'react'
+import tw from 'twin.macro'
+import { ReactComponent as Home } from '../resources/home.svg'
+import { ReactComponent as Login } from '../resources/key.svg'
+import { ModalStore } from '../store/MobxStore'
+import { SearchInput } from './SearchInput'
 
 const Div = tw.div`
   flex
@@ -19,7 +19,7 @@ const HomeSvg = tw(Home)`
 `
 
 const LoginSvg = tw(Login)`
-scale-50
+  scale-50
   mx-4 
   my-2 
   hover:fill-current 

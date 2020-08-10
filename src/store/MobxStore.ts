@@ -1,5 +1,5 @@
-import { action, observable } from "mobx"
-import { createContext } from "react"
+import { action, observable } from 'mobx'
+import { createContext } from 'react'
 
 class modalStore {
   @observable isActive = false

@@ -20,7 +20,7 @@ module.exports = {
         middle: "37.5%",
       },
       boxShadow: {
-        modal: "0 0 1000px 1000px rgb(0 0 0 / 50%)",
+        modal: "0 0 1000px 5000px rgb(0 0 0 / 50%)",
       },
     },
   },

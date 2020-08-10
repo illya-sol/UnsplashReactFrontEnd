@@ -1,27 +1,40 @@
-import React from "react"
-import { useForm } from "react-hook-form"
-import tw from "twin.macro"
+import React, { useContext } from 'react'
+import { bounceIn } from 'react-animations'
+import { useForm } from 'react-hook-form'
+import styled, { keyframes } from 'styled-components'
+import tw from 'twin.macro'
+import { ModalStore } from '../../store/MobxStore'
+
+const animation = keyframes`${bounceIn}`
 
 const Div = tw.div`
+  z-50
   absolute
-  shadow-modal
-  md:left-0
-  md:right-0
-  md:ml-auto
-  md:mr-auto
-  mt-16
   rounded
   w-full 
-  max-w-lg
+  h-full
+  max-h-full
+  max-w-full
+`
+
+const Ddiv = styled(Div)`
+  animation: 1s ${animation}  
 `
 
 const Form = tw.form`
   bg-fourth 
-  shadow-md 
+  shadow-modal  
   rounded 
+  mt-24
   px-8 
   pt-6 
   pb-8
+  md:left-0
+  md:right-0
+  md:ml-auto
+  md:mr-auto
+  w-full 
+  max-w-lg
 `
 
 const DivUsername = tw.div`
@@ -107,57 +120,61 @@ const A = tw.a`
 `
 
 export const Register: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm()
+	const { register, handleSubmit, errors } = useForm()
+	const flipModal = useContext(ModalStore).flipModal
 
-  const onSubmit = () => {}
-  return (
-    <Div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <DivUsername>
-          <Label htmlFor="username">Username</Label>
-          <InputUser
-            ref={register}
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Username"
-          />
-        </DivUsername>
-        <DivEmail>
-          <Label htmlFor="email">
-            Email
-            {errors.email && errors.email.message}
-          </Label>
-          <InputUser
-            ref={register({
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "invalid email address",
-              },
-            })}
-            id="email"
-            name="email"
-            type="text"
-            placeholder="Email"
-          />
-        </DivEmail>
-        <DivPassword>
-          <Label htmlFor="password">Password</Label>
-          <InputPassword
-            ref={register}
-            id="password"
-            name="password"
-            type="password"
-            placeholder="******************"
-          />
-          <Ppassword>Please choose a password.</Ppassword>
-        </DivPassword>
-        <DivSubmit>
-          <ButtonSubmit type="submit">Sign In</ButtonSubmit>
-          <A href="/forgotpass">Forgot Password?</A>
-        </DivSubmit>
-      </Form>
-    </Div>
-  )
+	const onSubmit = () => {}
+	return (
+		<Ddiv onClick={flipModal}>
+			<Form onSubmit={handleSubmit(onSubmit)}>
+				<DivUsername>
+					<Label htmlFor="username">Username</Label>
+					<InputUser
+						ref={register}
+						id="username"
+						name="username"
+						type="text"
+						placeholder="Username"
+						autoComplete="name"
+					/>
+				</DivUsername>
+				<DivEmail>
+					<Label htmlFor="email">
+						Email
+						{errors.email && errors.email.message}
+					</Label>
+					<InputUser
+						ref={register({
+							required: 'Required',
+							pattern: {
+								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+								message: 'invalid email address'
+							}
+						})}
+						id="email"
+						name="email"
+						type="text"
+						placeholder="Email"
+						autoComplete="email"
+					/>
+				</DivEmail>
+				<DivPassword>
+					<Label htmlFor="password">Password</Label>
+					<InputPassword
+						ref={register}
+						id="password"
+						name="password"
+						type="password"
+						placeholder="******************"
+						autoComplete="current-password"
+					/>
+					<Ppassword>Please choose a password.</Ppassword>
+				</DivPassword>
+				<DivSubmit>
+					<ButtonSubmit type="submit">Sign In</ButtonSubmit>
+					<A href="/forgotpass">Forgot Password?</A>
+				</DivSubmit>
+			</Form>
+		</Ddiv>
+	)
 }

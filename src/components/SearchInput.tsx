@@ -4,25 +4,26 @@ import tw from "twin.macro"
 import { ReactComponent as Search } from "../resources/search.svg"
 
 const Flexdiv = tw.div`
-   flex-grow
+  z-0  
+  flex-grow
 `
 
 const Div = tw.div`
-   relative
-   ml-auto
-   my-2
+  relative
+  ml-auto
+  my-2
 `
 
 const Input = tw.input`
-   relative
-   min-w-full
-   w-full
-   bg-white 
-   shadow 
-   rounded 
-   border-0 
-   p-3
-   pr-12
+  relative
+  min-w-full
+  w-full
+  bg-white 
+  shadow 
+  rounded 
+  border-0 
+  p-3
+  pr-12
 `
 
 const SearchSvg = tw(Search)`
@@ -35,9 +36,9 @@ const SearchSvg = tw(Search)`
 `
 
 const Sep = tw.pre`
-   inline
-   sm:w-0
-   lg:w-64
+  inline
+  sm:w-0
+  lg:w-64
 `
 
 export const SearchInput: React.FC = () => {
