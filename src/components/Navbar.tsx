@@ -8,7 +8,10 @@ import { SearchInput } from './SearchInput'
 const Div = tw.div`
   z-10
   flex
+  fixed
   bg-first
+  min-w-full
+  shadow-navbar
 `
 
 const HomeSvg = tw(Home)`

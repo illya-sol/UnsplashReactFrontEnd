@@ -18,7 +18,7 @@ module.exports = {
 				middle: '37.5%'
 			},
 			boxShadow: {
-				navbar: '0 0 1000px 5000px rgb(0 0 0 / 50%)'
+				navbar: '0 -5px 120px 0 rgba(192, 192, 200, 0.5)'
 			}
 		}
 	},
