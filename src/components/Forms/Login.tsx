@@ -1,10 +1,11 @@
-import { observer } from 'mobx-react'
 import React, { useContext } from 'react'
-import { fadeInDown, fadeOutDown } from 'react-animations'
+import { bounceIn } from 'react-animations'
 import { useForm } from 'react-hook-form'
 import styled, { keyframes } from 'styled-components'
 import tw from 'twin.macro'
 import { ModalStore } from '../../store/MobxStore'
+
+const animation = keyframes`${bounceIn}`
 
 const Div = tw.div`
   z-50
@@ -41,11 +42,8 @@ const Form = tw.form`
   max-w-lg
 `
 
-const animationIn = keyframes`${fadeInDown}`
-const animationOut = keyframes`${fadeOutDown}`
-
 const AnForm = styled(Form)`
-  animation 1s ${(props) => (props!['aria-disabled'] ? animationIn : animationOut)}
+  animation: 1s ${animation}  
 `
 
 const DivUsername = tw.div`
@@ -135,26 +133,17 @@ const A = tw.a`
   hover:text-third
 `
 
-export const Register: React.FC = observer(() => {
+export const Login: React.FC = () => {
 	const { register, handleSubmit, errors } = useForm({
 		criteriaMode: 'firstError'
 	})
-	const store = useContext(ModalStore)
+	const flipModal = useContext(ModalStore).flipRegister
 
-	const fadeOut = () => {
-		store!.isRegActive = false
-		setTimeout(() => {
-			store!.isRegShown = false
-		}, 1000)
-	}
-
-	const onSubmit = () => {
-		console.log('smh')
-	}
+	const onSubmit = () => {}
 	return (
-		<Div style={store!.isRegShown ? { visibility: 'visible' } : { visibility: 'hidden' }}>
-			<Blocker onClick={fadeOut} />
-			<AnForm aria-disabled={store!.isRegActive} onSubmit={handleSubmit(onSubmit)}>
+		<Div>
+			<Blocker onClick={flipModal} />
+			<AnForm onSubmit={handleSubmit(onSubmit)}>
 				<DivUsername>
 					<Label htmlFor="username">Username</Label>
 					<InputUser
@@ -220,11 +209,9 @@ export const Register: React.FC = observer(() => {
 				</DivPassword>
 				<DivSubmit>
 					<ButtonSubmit type="submit">Sign In</ButtonSubmit>
-					<A href="#" onClick={store!.switchModals}>
-						Register?
-					</A>
+					<A href="/forgotpass">Forgot Password?</A>
 				</DivSubmit>
 			</AnForm>
 		</Div>
 	)
-})
+}

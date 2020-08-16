@@ -35,7 +35,11 @@ const LoginBtn = tw.button`
 `
 
 export const Navbar: React.FC = () => {
-	const flipModal = useContext(ModalStore).flipModal
+	const store = useContext(ModalStore)
+	const flipModal = () => {
+		store!.isRegShown = true
+		store!.isRegActive = true
+	}
 
 	return (
 		<Div>
