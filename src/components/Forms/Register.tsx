@@ -59,7 +59,7 @@ const Label = tw.label`
 `
 
 const WarningLabel = tw(Label)`
-  text-third
+  text-red-500
 `
 
 const InputUser = tw.input`
@@ -134,7 +134,9 @@ const A = tw.a`
 `
 
 export const Register: React.FC = () => {
-	const { register, handleSubmit, errors } = useForm()
+	const { register, handleSubmit, errors } = useForm({
+		criteriaMode: 'firstError'
+	})
 	const flipModal = useContext(ModalStore).flipModal
 
 	const onSubmit = () => {}
@@ -145,13 +147,24 @@ export const Register: React.FC = () => {
 				<DivUsername>
 					<Label htmlFor="username">Username</Label>
 					<InputUser
-						ref={register}
+						ref={register({
+							required: 'Username is Required!',
+							minLength: {
+								value: 3,
+								message: 'Username must be more than 3 characters!'
+							},
+							maxLength: {
+								value: 30,
+								message: 'Username must be less than 30 characters!'
+							}
+						})}
 						id="username"
 						name="username"
 						type="text"
 						placeholder="Username"
 						autoComplete="name"
 					/>
+					<WarningLabel>{errors.username && errors.username.message}</WarningLabel>
 				</DivUsername>
 				<DivEmail>
 					<Label htmlFor="email">Email</Label>
@@ -174,13 +187,24 @@ export const Register: React.FC = () => {
 				<DivPassword>
 					<Label htmlFor="password">Password</Label>
 					<InputPassword
-						ref={register}
+						ref={register({
+							required: 'Password is Required!',
+							minLength: {
+								value: 3,
+								message: 'Password must be more than 3 characters!'
+							},
+							maxLength: {
+								value: 30,
+								message: 'Password must be less than 30 characters!'
+							}
+						})}
 						id="password"
 						name="password"
 						type="password"
 						placeholder="******************"
 						autoComplete="current-password"
 					/>
+					<WarningLabel>{errors.password && errors.password.message}</WarningLabel>
 					<Password>Please choose a password</Password>
 				</DivPassword>
 				<DivSubmit>
