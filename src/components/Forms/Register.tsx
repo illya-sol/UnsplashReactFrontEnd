@@ -107,32 +107,18 @@ const Password = tw.p`
   italic
 `
 
-const DivSubmit = tw.div`
-  flex 
-  items-center 
-  justify-between
-`
-
 const ButtonSubmit = tw.button`
   font-bold 
   py-2 
   px-4 
   rounded 
+  content-center
   focus:outline-none 
   focus:shadow-outline
   bg-white
   text-third
   hover:bg-third
   hover:text-second
-`
-
-const A = tw.a`
-  inline-block 
-  align-baseline 
-  font-bold 
-  text-sm
-  text-second
-  hover:text-third
 `
 
 export const Register: React.FC = observer(() => {
@@ -162,7 +148,7 @@ export const Register: React.FC = observer(() => {
 							required: 'Username is Required!',
 							minLength: {
 								value: 5,
-								message: 'Username must be more than 3 characters!'
+								message: 'Username must be at least 3 characters!'
 							},
 							maxLength: {
 								value: 30,
@@ -218,12 +204,7 @@ export const Register: React.FC = observer(() => {
 					<WarningLabel>{errors.password && errors.password.message}</WarningLabel>
 					<Password>Please choose a password</Password>
 				</DivPassword>
-				<DivSubmit>
-					<ButtonSubmit type="submit">Sign In</ButtonSubmit>
-					<A href="#" onClick={store!.switchModals}>
-						Register?
-					</A>
-				</DivSubmit>
+				<ButtonSubmit type="submit">Register</ButtonSubmit>
 			</AnForm>
 		</Div>
 	)

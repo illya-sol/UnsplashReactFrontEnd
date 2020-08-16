@@ -1,11 +1,10 @@
+import { observer } from 'mobx-react'
 import React, { useContext } from 'react'
-import { bounceIn } from 'react-animations'
+import { fadeInDown, fadeOutDown } from 'react-animations'
 import { useForm } from 'react-hook-form'
 import styled, { keyframes } from 'styled-components'
 import tw from 'twin.macro'
 import { ModalStore } from '../../store/MobxStore'
-
-const animation = keyframes`${bounceIn}`
 
 const Div = tw.div`
   z-50
@@ -42,8 +41,11 @@ const Form = tw.form`
   max-w-lg
 `
 
+const animationIn = keyframes`${fadeInDown}`
+const animationOut = keyframes`${fadeOutDown}`
+
 const AnForm = styled(Form)`
-  animation: 1s ${animation}  
+  animation 1s ${(props) => (props!['aria-disabled'] ? animationIn : animationOut)}
 `
 
 const DivUsername = tw.div`
@@ -74,10 +76,6 @@ const InputUser = tw.input`
   leading-tight 
   focus:outline-none 
   focus:shadow-outline
-`
-
-const DivEmail = tw.div`
-  mb-6
 `
 
 const DivPassword = tw.div`
@@ -133,31 +131,30 @@ const A = tw.a`
   hover:text-third
 `
 
-export const Login: React.FC = () => {
+export const Login: React.FC = observer(() => {
 	const { register, handleSubmit, errors } = useForm({
 		criteriaMode: 'firstError'
 	})
-	const flipModal = useContext(ModalStore).flipRegister
+	const store = useContext(ModalStore)
 
-	const onSubmit = () => {}
+	const fadeOut = () => {
+		store!.isLogActive = false
+		setTimeout(() => {
+			store!.isLogShown = false
+		}, 1000)
+	}
+
+	const onSubmit = () => {
+		console.log('smh')
+	}
 	return (
-		<Div>
-			<Blocker onClick={flipModal} />
-			<AnForm onSubmit={handleSubmit(onSubmit)}>
+		<Div style={store!.isLogShown ? { visibility: 'visible' } : { visibility: 'hidden' }}>
+			<Blocker onClick={fadeOut} />
+			<AnForm aria-disabled={store!.isLogActive} onSubmit={handleSubmit(onSubmit)}>
 				<DivUsername>
-					<Label htmlFor="username">Username</Label>
+					<Label htmlFor="username">Username or Email</Label>
 					<InputUser
-						ref={register({
-							required: 'Username is Required!',
-							minLength: {
-								value: 5,
-								message: 'Username must be more than 3 characters!'
-							},
-							maxLength: {
-								value: 30,
-								message: 'Username must be less than 30 characters!'
-							}
-						})}
+						ref={register()}
 						id="username"
 						name="username"
 						type="text"
@@ -166,24 +163,6 @@ export const Login: React.FC = () => {
 					/>
 					<WarningLabel>{errors.username && errors.username.message}</WarningLabel>
 				</DivUsername>
-				<DivEmail>
-					<Label htmlFor="email">Email</Label>
-					<InputUser
-						ref={register({
-							required: 'Email is Required!',
-							pattern: {
-								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								message: 'invalid email address!'
-							}
-						})}
-						id="email"
-						name="email"
-						type="text"
-						placeholder="Email"
-						autoComplete="email"
-					/>
-					<WarningLabel>{errors.email && errors.email.message}</WarningLabel>
-				</DivEmail>
 				<DivPassword>
 					<Label htmlFor="password">Password</Label>
 					<InputPassword
@@ -191,7 +170,7 @@ export const Login: React.FC = () => {
 							required: 'Password is Required!',
 							minLength: {
 								value: 3,
-								message: 'Password must be more than 3 characters!'
+								message: 'Password must be at least 3 characters!'
 							},
 							maxLength: {
 								value: 30,
@@ -209,9 +188,11 @@ export const Login: React.FC = () => {
 				</DivPassword>
 				<DivSubmit>
 					<ButtonSubmit type="submit">Sign In</ButtonSubmit>
-					<A href="/forgotpass">Forgot Password?</A>
+					<A href="#" onClick={store!.switchModals}>
+						Register?
+					</A>
 				</DivSubmit>
 			</AnForm>
 		</Div>
 	)
-}
+})

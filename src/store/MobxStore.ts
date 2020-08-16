@@ -12,15 +12,15 @@ class modalStore {
 		this.isRegActive = !this.isRegActive
 	}
 	@action
-	switchModals = () => {
-		this.isRegActive = false
-		this.isRegShown = false
-		this.isLogActive = true
-		this.isLogShown = true
-	}
-	@action
 	flipLogIn = () => {
 		this.isLogActive = !this.isLogActive
+	}
+	@action
+	switchModals = () => {
+		this.isRegActive = true
+		this.isRegShown = true
+		this.isLogActive = false
+		this.isLogShown = false
 	}
 }
 
