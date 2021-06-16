@@ -33,7 +33,7 @@
     "autoprefixer": "^9.8.6",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
-    "postcss": "^7.0.32",
+    "postcss": "^7.0.36",
     "postcss-cli": "^7.1.1",
     "react-app-rewire-mobx": "^1.0.9",
     "react-app-rewired": "^2.1.6",
